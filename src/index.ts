@@ -1,6 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { DIR_SERVE, PORT } from "./config";
+import { address } from "ip";
+import { networkInterfaces } from "os";
+import { compose } from "./fp";
+import { ipv4StringArray } from "./ips";
 
 main();
 
@@ -31,6 +35,14 @@ function runApp() {
   app.use(express.static(DIR_SERVE));
 
   app.listen(PORT, () => {
-    console.log("Express running." + PORT + DIR_SERVE);
+    console.log("[I] Express running.");
+
+    console.log("[I] Dir:", DIR_SERVE);
+
+    const ips = ipv4StringArray();
+    const links = ips.map((d) => `http://${d}:${PORT}`).join("\n");
+
+    console.log("[I] Listen at:");
+    console.log(links);
   });
 }
