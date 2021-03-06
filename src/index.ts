@@ -1,48 +1,55 @@
+import http from "http";
 import express from "express";
-import bodyParser from "body-parser";
+import getPort from "get-port";
+import chalk from "chalk";
+import logSymbols from "log-symbols";
 import { DIR_SERVE, PORT } from "./config";
-import { address } from "ip";
-import { networkInterfaces } from "os";
-import { compose } from "./fp";
 import { ipv4StringArray } from "./ips";
+import { initMiddleware } from "./initMiddleware";
+import { initRequest } from "./initRequest";
 
-main();
+const HOST = "127.0.0.1";
+const PORTS = [5544, 8080, 3000];
 
-function main() {
-  runApp();
-}
+const start = async () => {
+  const port = await getPort({ port: PORTS });
+  const address = `http://${HOST}:${port}`;
 
-function runApp() {
   const app = express();
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
 
-  app.use((req, res, next) => {
-    console.log(new Date().toLocaleString(), req.url);
-    next();
-  });
-
-  app.get("/", (req, res) => {
-    res.send("Express running." + PORT + DIR_SERVE);
-  });
-
-  app.post("/", (req, res) => {
-    console.log(req.body);
-
-    res.send("Express running." + PORT + DIR_SERVE);
-  });
-
-  app.use(express.static(DIR_SERVE));
+  initMiddleware(app);
+  initRequest(app);
 
   app.listen(PORT, () => {
     console.log("[I] Express running.");
+  });
 
-    console.log("[I] Dir:", DIR_SERVE);
+  const httpServer = http.createServer(app).listen(port, HOST, () => {
+    const tip = `ExpressServer is running at ${chalk.magenta.underline(
+      address
+    )}${logSymbols.success}`;
+
+    console.log(tip);
+
+    console.log("Serve Dir:", DIR_SERVE);
 
     const ips = ipv4StringArray();
-    const links = ips.map((d) => `http://${d}:${PORT}`).join("\n");
+    const links = ips
+      .map((d) => chalk.magenta.underline(`http://${d}:${PORT}`))
+      .join("\n");
 
-    console.log("[I] Listen at:");
+    console.log("Listen at:");
     console.log(links);
   });
+
+  process.on("SIGINT", () => {
+    httpServer.close();
+
+    const tip = chalk.greenBright.bold("\nGoodbye.");
+    console.log(tip);
+  });
+};
+
+if (require.main == module) {
+  start();
 }
