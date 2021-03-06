@@ -1,9 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { DIR_SERVE, PORT } from "./config";
-import { address } from "ip";
-import { networkInterfaces } from "os";
-import { compose } from "./fp";
 import { ipv4StringArray } from "./ips";
 
 main();
