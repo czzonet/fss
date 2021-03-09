@@ -43,10 +43,14 @@ const start = async () => {
   });
 
   process.on("SIGINT", () => {
-    httpServer.close();
+    httpServer.close((err) => {
+      err ? console.log(err) : null;
 
-    const tip = chalk.greenBright.bold("\nGoodbye.");
-    console.log(tip);
+      const tip = chalk.greenBright.bold("\nGoodbye.");
+      console.log(tip);
+
+      process.exit();
+    });
   });
 };
 
