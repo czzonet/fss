@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "main": "dist/index.js",
   "bin": {
-    "npm-cli-package": "dist/index.js"
+    "fss": "start.sh"
   },
   "files": [
     "dist/"
