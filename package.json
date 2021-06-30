@@ -1,7 +1,11 @@
 {
-  "name": "fss",
-  "version": "1.0.0",
+  "name": "file-static-server-start",
+  "version": "1.0.1",
   "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "author": "czzonet <czzonet@163.com>",
   "repository": {
     "type": "git",
@@ -12,6 +16,9 @@
     "url": "https://github.com/czzonet/fss/issues"
   },
   "homepage": "https://github.com/czzonet/fss#readme",
+  "keywords": [
+    "static server"
+  ],
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc ",
