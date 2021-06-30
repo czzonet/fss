@@ -3,7 +3,7 @@
   "version": "1.0.6",
   "main": "dist/index.js",
   "bin": {
-    "fss": "start.sh"
+    "fss": "dist/index.js"
   },
   "files": [
     "dist/"
