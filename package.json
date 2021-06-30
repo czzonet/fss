@@ -2,7 +2,9 @@
   "name": "file-static-server-start",
   "version": "1.0.4",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "npm-cli-package":"dist/index.js"
+  },
   "files": [
     "dist/"
   ],
