@@ -1,7 +1,7 @@
 {
   "name": "fss",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "czzonet <czzonet@163.com>",
   "repository": {
     "type": "git",
