@@ -84,4 +84,4 @@ yarn global add my-xxx
 ## Reference
 
 1. [使用 NPM 发布和使用 CLI 工具](https://juejin.cn/post/6844904153030852621)
-2. [如何发布自己的NPM包（模块）？](
+2. [如何发布自己的NPM包（模块）？](https://juejin.cn/post/6844903673684836365)
