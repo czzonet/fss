@@ -2,7 +2,7 @@
   "name": "file-static-server-start",
   "version": "1.0.2",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": "start.sh",
   "files": [
     "dist/"
   ],
