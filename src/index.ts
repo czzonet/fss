@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import http from "http";
 import express from "express";
 import getPort from "get-port";
